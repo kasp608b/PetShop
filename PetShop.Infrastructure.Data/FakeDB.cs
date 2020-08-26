@@ -51,6 +51,13 @@ namespace PetShop.Infrastructure.Data
             };
         }
 
+        public static Pet AddPet(Pet pet)
+        {
+            pet.ID = _id++;
+            _pets.Add(pet);
+            return pet;
+        }
+
 
     }
 

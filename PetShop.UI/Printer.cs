@@ -3,8 +3,10 @@ using PetShop.Core.ApplicationService.Implementations;
 using PetShop.Core.DomainService;
 using PetShop.Core.Entities;
 using PetShop.Core.Entities.Enums;
+using PetShop.Core.HelperClasses.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace PetShop.UI
@@ -12,22 +14,33 @@ namespace PetShop.UI
     public class Printer
     {
         private IPetService _petService;
-        public Printer(IPetService petService)
+        private IParser _parser;
+        public Printer(IPetService petService, IParser parser)
         {
             _petService = petService;
+            _parser = parser;
         }
 
         internal void StartMenu()
         {
-
+            int selection;
 
             string[] menuItems =
             {
-                "List All Videos",
-                "Exit",
+                "List All Pets",
+                "Add Pet",
+                "Exit"
             };
-
-            var selection = ShowMenu(menuItems, MenuTypes.Main);
+            try
+            {
+                selection = ShowMenu(menuItems, MenuTypes.Main);
+            }
+            catch (InvalidDataException e)
+            {
+                Console.WriteLine("Something went wrong with menuTypes" + e);
+                selection = menuItems.Length;
+            }
+            
             bool exit = false;
 
             while (exit == false)
@@ -39,6 +52,13 @@ namespace PetShop.UI
                         Console.Clear();
                         Console.WriteLine("List of pets\n");
                         PrintAllPets();
+                        break;
+
+                    case 2:
+
+                        Console.Clear();
+                        Console.WriteLine("Add Pet\n");
+                        AddPet();
                         break;
 
                     default:
@@ -66,6 +86,11 @@ namespace PetShop.UI
             }
         }
 
+        internal void AddPet()
+        {
+
+        }
+
         internal int ShowMenu(string[] menuItems, MenuTypes type)
         {
             Console.Clear();
@@ -79,7 +104,7 @@ namespace PetShop.UI
                     Console.WriteLine("Choose which property to perform action on:\n");
                     break;
                 default:
-                    throw new Exception("Wrong enum given");
+                    throw new InvalidDataException("Wrong enum given");
             }
 
 
@@ -88,7 +113,7 @@ namespace PetShop.UI
                 Console.WriteLine($"{(i + 1)} : { menuItems[i]}");
             }
             int selection;
-            while (!int.TryParse(Console.ReadLine(), out selection)
+            while (!_parser.IsIntParsable(Console.ReadLine(), out selection)
                //OR
                || selection < 1
                || selection > menuItems.Length)

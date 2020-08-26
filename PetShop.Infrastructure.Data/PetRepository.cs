@@ -12,5 +12,9 @@ namespace PetShop.Infrastructure.Data
         {
             return FakeDB._pets;
         }
+        public Pet AddPet(Pet petToAdd)
+        {
+            return FakeDB.AddPet(petToAdd);
+        }
     }
 }
