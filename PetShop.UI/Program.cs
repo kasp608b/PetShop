@@ -15,7 +15,7 @@ namespace PetShop.UI
             IPetRepository petRepository = new PetRepository();
             IPetService petService = new PetService(petRepository);
             Printer printer = new Printer(petService);
-            printer.PrintAllPets();
+            printer.StartMenu();
         }
     }
 }
