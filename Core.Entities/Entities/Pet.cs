@@ -15,5 +15,10 @@ namespace PetShop.Core.Entities
         public string Color { get; set; }
         public string PreviousOwner { get; set; }
         public double Price { get; set; }
+
+        public override string ToString()
+        {
+            return $"ID = {ID.ToString()}, Name = {Name.ToString()}, Type = {Type.ToString()}, BirthDate = {BirthDate.ToString()}, SoldDate = {SoldDate.ToString()}, Color = {Color.ToString()}, PreviousOwner = {PreviousOwner.ToString()}, Price = {Price.ToString()},\n";
+        }
     }
 }

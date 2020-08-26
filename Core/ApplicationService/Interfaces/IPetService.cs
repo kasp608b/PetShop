@@ -3,10 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PetShop.Core.DomainService
+namespace PetShop.Core.ApplicationService
 {
-    public interface IPetRepository
+    public interface IPetService
     {
-        public List<Pet> ReadPets();
+        public List<Pet> GetPets();
+
     }
 }
