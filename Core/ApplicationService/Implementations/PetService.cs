@@ -96,7 +96,7 @@ namespace PetShop.Core.ApplicationService.Implementations
 
         }
 
-        public List<Pet> SortPetsByType()
+        public List<Pet> SortPetsByPrice()
         {
            return _petRepository.ReadPets().OrderBy(o => o.Price).ToList();
         }

@@ -18,6 +18,6 @@ namespace PetShop.Core.ApplicationService
 
         public List<Pet> SearchByType(PetType type);
 
-        public List<Pet> SortPetsByType();
+        public List<Pet> SortPetsByPrice();
     }
 }

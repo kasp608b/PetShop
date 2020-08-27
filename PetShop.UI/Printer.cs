@@ -7,6 +7,7 @@ using PetShop.Core.HelperClasses.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace PetShop.UI
@@ -33,6 +34,7 @@ namespace PetShop.UI
                 "Edit Pet",
                 "Search by type",
                 "Sort pets by type",
+                "Get the 5 cheapest pets",
                 "Exit"
             };
             try
@@ -89,8 +91,15 @@ namespace PetShop.UI
                     case 6:
 
                         Console.Clear();
-                        Console.WriteLine("Sort pets by type\n");
-                        SortByType();
+                        Console.WriteLine("Sort pets by price\n");
+                        SortByPrice();
+                        break;
+
+                    case 7:
+
+                        Console.Clear();
+                        Console.WriteLine("Get the five cheapest pets");
+                        Get5CheapestPets();
                         break;
 
                     default:
@@ -419,12 +428,31 @@ namespace PetShop.UI
 
         }
 
-        internal void SortByType()
+        internal void SortByPrice()
         {
-            foreach (Pet pet in _petService.SortPetsByType())
+            foreach (Pet pet in _petService.SortPetsByPrice())
             {
                 Console.WriteLine(pet.ToString());
             } 
+        }
+
+        internal void Get5CheapestPets()
+        {
+            if(_petService.SortPetsByPrice().Count >= 5)
+            {
+                for (int i = 0; i <= 4; i++)
+                {
+                    Console.WriteLine(_petService.SortPetsByPrice().ElementAt(i).ToString());
+                }
+            }
+            else 
+            {
+                foreach (Pet pet in _petService.SortPetsByPrice())
+                {
+                    Console.WriteLine(pet.ToString());
+                }
+            }
+           
         }
 
         internal int ShowMenu(string[] menuItems, MenuTypes type)
@@ -452,6 +480,8 @@ namespace PetShop.UI
                 Console.WriteLine($"{(i + 1)} : { menuItems[i]}");
             }
             int selection;
+
+
             while (!_parser.IsIntParsable(Console.ReadLine(), out selection)
                //OR
                || selection < 1
