@@ -30,6 +30,7 @@ namespace PetShop.UI
                 "List All Pets",
                 "Add Pet",
                 "Delete Pet",
+                "Edit Pet",
                 "Exit"
             };
             try
@@ -38,7 +39,7 @@ namespace PetShop.UI
             }
             catch (InvalidDataException e)
             {
-                Console.WriteLine("Something went wrong with menuTypes" + e);
+                Console.WriteLine("Something went wrong with menuTypes\n" + e);
                 selection = menuItems.Length;
             }
             
@@ -67,6 +68,13 @@ namespace PetShop.UI
                         Console.Clear();
                         Console.WriteLine("Delete Pet\n");
                         DeletePet();
+                        break;
+
+                    case 4:
+
+                        Console.Clear();
+                        Console.WriteLine("Edit Pet\n");
+                        EditPet();
                         break;
 
                     default:
@@ -125,7 +133,7 @@ namespace PetShop.UI
             }
             catch (InvalidDataException e)
             {
-                Console.WriteLine("Something went wrong with menuTypes" + e);
+                Console.WriteLine("Something went wrong with menuTypes\n" + e);
                 selection = menuItems.Length;
             }
 
@@ -193,7 +201,7 @@ namespace PetShop.UI
         {
             try
             {
-                Console.WriteLine("A list of all the pet\n");
+                Console.WriteLine("A list of all the pets\n");
                 PrintAllPets();
 
                 Console.WriteLine("Input valid pet id");
@@ -210,7 +218,120 @@ namespace PetShop.UI
             }
             catch (InvalidDataException e)
             {
-                Console.WriteLine("Something went from the the pet deletetion" + e);
+                Console.WriteLine("Something went wrong with the the pet deletetion\n" + e);
+            }
+        }
+
+        public void EditPet()
+        {
+            try
+            {
+                Console.WriteLine("A list of all the pets\n");
+                PrintAllPets();
+
+                Console.WriteLine("Input valid pet id");
+
+                int parsedId;
+                while (!_parser.IsIntParsable(Console.ReadLine(), out parsedId))
+                {
+                    Console.WriteLine("Invalid id, please try again");
+                }
+
+                int selection;
+                string name;
+                PetType type;
+                DateTime birthDate;
+                DateTime soldDate;
+                string color;
+                string previousOwner;
+                double price;
+
+                Console.WriteLine("Input valid pet name\n");
+
+                name = Console.ReadLine();
+
+                string[] menuItems =
+                {
+                    "Cat",
+                    "Dog",
+                    "Fish",
+                    "Goat",
+                    "Tiger",
+                    "Parrot",
+                };
+
+                try
+                {
+                    selection = ShowMenu(menuItems, MenuTypes.PetTypes);
+                }
+                catch (InvalidDataException e)
+                {
+                    Console.WriteLine("Something went wrong with menuTypes\n" + e);
+                    selection = menuItems.Length;
+                }
+
+                switch (selection)
+                {
+                    case 1:
+                        type = PetType.Cat;
+                        break;
+
+                    case 2:
+                        type = PetType.Dog;
+                        break;
+
+                    case 3:
+                        type = PetType.Fish;
+                        break;
+
+                    case 4:
+                        type = PetType.Goat;
+                        break;
+
+                    case 5:
+                        type = PetType.Parrot;
+                        break;
+
+                    case 6:
+                        type = PetType.Tiger;
+                        break;
+                    default:
+                        type = PetType.Kakorot;
+                        break;
+                }
+
+                Console.WriteLine("Input valid birthdate for pet\n");
+                Console.WriteLine("Format is day/month/year\n");
+                while (!_parser.IsDateParsable(Console.ReadLine(), out birthDate))
+                {
+                    Console.WriteLine("Not a valid date, please try again");
+                }
+
+                Console.WriteLine("Input valid solddate for pet\n");
+                Console.WriteLine("Format is day/month/year\n");
+                while (!_parser.IsDateParsable(Console.ReadLine(), out soldDate))
+                {
+                    Console.WriteLine("Not a valid date, please try again");
+                }
+
+                Console.WriteLine("Input at valid color for pet\n");
+                color = Console.ReadLine();
+
+                Console.WriteLine("Input at valid previous owner for pet\n");
+                previousOwner = Console.ReadLine();
+
+                Console.WriteLine("Input a valid price for pet\n");
+
+                while (!_parser.IsDoubleParsable(Console.ReadLine(), out price))
+                {
+                    Console.WriteLine("Not a valid price, please try again");
+                }
+
+                Console.WriteLine($"Succesfully edited {_petService.EditPet(parsedId, name, type, birthDate, soldDate, color, previousOwner, price).ToString()}");
+            }
+            catch (InvalidDataException e)
+            {
+                Console.WriteLine("Something went wrong with the the pet deletetion\n" + e);
             }
         }
 

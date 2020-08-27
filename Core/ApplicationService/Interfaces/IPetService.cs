@@ -13,5 +13,7 @@ namespace PetShop.Core.ApplicationService
         public Pet AddPet(string name, PetType type, DateTime birthdate, DateTime soldDate, string color, string previousOwner, double price);
 
         public Pet DeletePet(int id);
+
+        public Pet EditPet(int id, string name, PetType type, DateTime birthdate, DateTime soldDate, string color, string previousOwner, double price);
     }
 }
