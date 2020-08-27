@@ -18,7 +18,7 @@ namespace PetShop.Infrastructure.Data
                 {
                     ID = _id++,
                     Name = "Jerry",
-                    Type = PetType.CAT,
+                    Type = PetType.Cat,
                     BirthDate = DateTime.Now.AddYears(-12),
                     Color = "Blue",
                     PreviousOwner = "Arnold Perkins",
@@ -30,7 +30,7 @@ namespace PetShop.Infrastructure.Data
                 {
                     ID = _id++,
                     Name = "Tom",
-                    Type = PetType.DOG,
+                    Type = PetType.Dog,
                     BirthDate = DateTime.Now.AddYears(-22),
                     Color = "Red",
                     PreviousOwner = "Cory Zemecki",
@@ -41,7 +41,7 @@ namespace PetShop.Infrastructure.Data
                 {
                     ID = _id++,
                     Name = "Cinc",
-                    Type = PetType.FISH,
+                    Type = PetType.Fish,
                     BirthDate = DateTime.Now.AddYears(-1),
                     Color = "Purple",
                     PreviousOwner = "Harold Harold",

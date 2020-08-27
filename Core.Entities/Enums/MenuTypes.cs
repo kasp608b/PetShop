@@ -8,5 +8,6 @@ namespace PetShop.Core.Entities.Enums
     {
         Main,
         Properties,
+        PetTypes
     }
 }

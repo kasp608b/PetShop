@@ -9,19 +9,7 @@ namespace PetShop.Core.HelperClasses.Implementations
 {
     public class Parser : IParser
     {
-        public DateTime DateParser(string stringToParse)
-        {
-            DateTime searchDateParsed;
-
-            if (!DateTime.TryParse(stringToParse, out searchDateParsed))
-            {
-                throw new InvalidDataException("Input must be an date");
-            }
-            else
-            {
-                return searchDateParsed;
-            }
-        }
+        
         public bool IsDateParsable(string stringToParse, out DateTime parsedDate)
         {
             DateTime searchDateParsed;
@@ -37,17 +25,20 @@ namespace PetShop.Core.HelperClasses.Implementations
             }
         }
 
-        public int IntParser(string stringToParse)
+        public bool IsDoubleParsable(string stringToParse, out double parsedDouble)
         {
-            int searchintParsed;
+            double searchDoubleParsed;
 
-            if (!int.TryParse(stringToParse, out searchintParsed))
+            if (!Double.TryParse(stringToParse, out searchDoubleParsed))
             {
-                throw new InvalidDataException("Input must be an int");
+
+                parsedDouble = searchDoubleParsed;
+                return false;
             }
             else
             {
-                return searchintParsed;
+                parsedDouble = searchDoubleParsed;
+                return true;
             }
         }
 
