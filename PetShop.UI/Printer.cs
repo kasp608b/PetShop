@@ -32,6 +32,7 @@ namespace PetShop.UI
                 "Delete Pet",
                 "Edit Pet",
                 "Search by type",
+                "Sort pets by type",
                 "Exit"
             };
             try
@@ -83,6 +84,13 @@ namespace PetShop.UI
                         Console.Clear();
                         Console.WriteLine("Search by type\n");
                         SearchByType();
+                        break;
+
+                    case 6:
+
+                        Console.Clear();
+                        Console.WriteLine("Sort pets by type\n");
+                        SortByType();
                         break;
 
                     default:
@@ -408,7 +416,15 @@ namespace PetShop.UI
             {
                 Console.WriteLine("Something went wrong with search\n" + e);
             }
-            
+
+        }
+
+        internal void SortByType()
+        {
+            foreach (Pet pet in _petService.SortPetsByType())
+            {
+                Console.WriteLine(pet.ToString());
+            } 
         }
 
         internal int ShowMenu(string[] menuItems, MenuTypes type)

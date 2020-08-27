@@ -22,7 +22,7 @@ namespace PetShop.Infrastructure.Data
                     BirthDate = DateTime.Now.AddYears(-12),
                     Color = "Blue",
                     PreviousOwner = "Arnold Perkins",
-                    Price = 123,
+                    Price = 50,
                     SoldDate = DateTime.Now.AddYears(-2),
 
                 },
@@ -34,7 +34,7 @@ namespace PetShop.Infrastructure.Data
                     BirthDate = DateTime.Now.AddYears(-22),
                     Color = "Red",
                     PreviousOwner = "Cory Zemecki",
-                    Price = 123,
+                    Price = 10,
                     SoldDate = DateTime.Now.AddYears(-5),
                 },
                 new Pet
@@ -45,7 +45,7 @@ namespace PetShop.Infrastructure.Data
                     BirthDate = DateTime.Now.AddYears(-1),
                     Color = "Purple",
                     PreviousOwner = "Harold Harold",
-                    Price = 123,
+                    Price = 100,
                     SoldDate = DateTime.Now.AddYears(-4),
                 }
             };

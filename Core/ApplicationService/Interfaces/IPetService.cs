@@ -17,5 +17,7 @@ namespace PetShop.Core.ApplicationService
         public Pet EditPet(int id, string name, PetType type, DateTime birthdate, DateTime soldDate, string color, string previousOwner, double price);
 
         public List<Pet> SearchByType(PetType type);
+
+        public List<Pet> SortPetsByType();
     }
 }
