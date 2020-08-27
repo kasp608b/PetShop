@@ -29,6 +29,7 @@ namespace PetShop.UI
             {
                 "List All Pets",
                 "Add Pet",
+                "Delete Pet",
                 "Exit"
             };
             try
@@ -59,6 +60,13 @@ namespace PetShop.UI
                         Console.Clear();
                         Console.WriteLine("Add Pet\n");
                         AddPet();
+                        break;
+
+                    case 3:
+
+                        Console.Clear();
+                        Console.WriteLine("Delete Pet\n");
+                        DeletePet();
                         break;
 
                     default:
@@ -113,7 +121,7 @@ namespace PetShop.UI
 
             try
             {
-                selection = ShowMenu(menuItems, MenuTypes.Main);
+                selection = ShowMenu(menuItems, MenuTypes.PetTypes);
             }
             catch (InvalidDataException e)
             {
@@ -179,6 +187,31 @@ namespace PetShop.UI
             }
 
             _petService.AddPet(name, type, birthDate, soldDate, color, previousOwner, price);
+        }
+
+        public void DeletePet()
+        {
+            try
+            {
+                Console.WriteLine("A list of all the pet\n");
+                PrintAllPets();
+
+                Console.WriteLine("Input valid pet id");
+
+                int parsedId;
+                while (!_parser.IsIntParsable(Console.ReadLine(), out parsedId))
+                {
+                    Console.WriteLine("Invalid id, please try again");
+                }
+
+                Console.WriteLine($"Succesfully deleted {_petService.DeletePet(parsedId).Name.ToString()}");
+
+
+            }
+            catch (InvalidDataException e)
+            {
+                Console.WriteLine("Something went from the the pet deletetion" + e);
+            }
         }
 
         internal int ShowMenu(string[] menuItems, MenuTypes type)

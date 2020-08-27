@@ -16,5 +16,11 @@ namespace PetShop.Infrastructure.Data
         {
             return FakeDB.AddPet(petToAdd);
         }
+
+        public Pet DeletePet(Pet petToDelete)
+        {
+            ReadPets().Remove(petToDelete);
+            return petToDelete;
+        }
     }
 }

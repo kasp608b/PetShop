@@ -3,6 +3,7 @@ using PetShop.Core.Entities;
 using PetShop.Core.Entities.Enums;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -31,6 +32,21 @@ namespace PetShop.Core.ApplicationService.Implementations
             };
 
             return _petRepository.AddPet(pet);
+        }
+
+        public Pet DeletePet(int id)
+        {
+           Pet petToDelete;
+           if(!_petRepository.ReadPets().Exists(x => x.ID == id))
+           {
+                throw new InvalidDataException("A pet with this ID does not exist");
+           }
+           else 
+           {
+                petToDelete = _petRepository.ReadPets().Find(x => x.ID == id);
+                return _petRepository.DeletePet(petToDelete);
+           }
+
         }
 
         public List<Pet> GetPets()

@@ -10,6 +10,8 @@ namespace PetShop.Core.DomainService
         public List<Pet> ReadPets();
 
         public Pet AddPet(Pet petToAdd);
+
+        public Pet DeletePet(Pet petToDelete);
     }
 
 }
