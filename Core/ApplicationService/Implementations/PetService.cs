@@ -77,5 +77,23 @@ namespace PetShop.Core.ApplicationService.Implementations
         {
             return _petRepository.ReadPets();
         }
+
+        public List<Pet> SearchByType(PetType type)
+        {
+            List<Pet> petsFound = new List<Pet>();
+
+            if(!_petRepository.ReadPets().Exists(x => x.Type == type))
+            {
+                throw new InvalidDataException("No pets of this type exist");
+            }
+            else 
+            {
+                petsFound = _petRepository.ReadPets().FindAll(x => x.Type == type);
+                return petsFound;
+            }
+
+
+
+        }
     }
 }

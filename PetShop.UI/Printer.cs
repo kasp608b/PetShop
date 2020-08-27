@@ -31,6 +31,7 @@ namespace PetShop.UI
                 "Add Pet",
                 "Delete Pet",
                 "Edit Pet",
+                "Search by type",
                 "Exit"
             };
             try
@@ -75,6 +76,13 @@ namespace PetShop.UI
                         Console.Clear();
                         Console.WriteLine("Edit Pet\n");
                         EditPet();
+                        break;
+
+                    case 5:
+
+                        Console.Clear();
+                        Console.WriteLine("Search by type\n");
+                        SearchByType();
                         break;
 
                     default:
@@ -197,7 +205,7 @@ namespace PetShop.UI
             _petService.AddPet(name, type, birthDate, soldDate, color, previousOwner, price);
         }
 
-        public void DeletePet()
+        internal void DeletePet()
         {
             try
             {
@@ -222,7 +230,7 @@ namespace PetShop.UI
             }
         }
 
-        public void EditPet()
+        internal void EditPet()
         {
             try
             {
@@ -333,6 +341,74 @@ namespace PetShop.UI
             {
                 Console.WriteLine("Something went wrong with the the pet deletetion\n" + e);
             }
+        }
+
+        internal void SearchByType()
+        {
+            int selection;
+            PetType type;
+            string[] menuItems =
+               {
+                    "Cat",
+                    "Dog",
+                    "Fish",
+                    "Goat",
+                    "Tiger",
+                    "Parrot",
+                };
+
+            try
+            {
+                selection = ShowMenu(menuItems, MenuTypes.PetTypes);
+            }
+            catch (InvalidDataException e)
+            {
+                Console.WriteLine("Something went wrong with menuTypes\n" + e);
+                selection = menuItems.Length;
+            }
+
+            switch (selection)
+            {
+                case 1:
+                    type = PetType.Cat;
+                    break;
+
+                case 2:
+                    type = PetType.Dog;
+                    break;
+
+                case 3:
+                    type = PetType.Fish;
+                    break;
+
+                case 4:
+                    type = PetType.Goat;
+                    break;
+
+                case 5:
+                    type = PetType.Parrot;
+                    break;
+
+                case 6:
+                    type = PetType.Tiger;
+                    break;
+                default:
+                    type = PetType.Kakorot;
+                    break;
+            }
+
+            try
+            {
+                foreach (Pet pet in _petService.SearchByType(type))
+                {
+                    Console.WriteLine(pet.ToString());
+                }
+            }
+            catch (InvalidDataException e)
+            {
+                Console.WriteLine("Something went wrong with search\n" + e);
+            }
+            
         }
 
         internal int ShowMenu(string[] menuItems, MenuTypes type)
