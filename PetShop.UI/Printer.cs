@@ -12,7 +12,7 @@ using System.Text;
 
 namespace PetShop.UI
 {
-    public class Printer
+    public class Printer : IPrinter
     {
         private IPetService _petService;
         private IParser _parser;
@@ -22,7 +22,7 @@ namespace PetShop.UI
             _parser = parser;
         }
 
-        internal void StartMenu()
+        public void StartMenu()
         {
             int selection;
 
@@ -119,7 +119,7 @@ namespace PetShop.UI
             }
         }
 
-        internal void PrintAllPets()
+        public void PrintAllPets()
         {
             foreach (Pet pet in _petService.GetPets())
             {
@@ -127,7 +127,7 @@ namespace PetShop.UI
             }
         }
 
-        internal void AddPet()
+        public void AddPet()
         {
             int selection;
             string name;
@@ -222,7 +222,7 @@ namespace PetShop.UI
             _petService.AddPet(name, type, birthDate, soldDate, color, previousOwner, price);
         }
 
-        internal void DeletePet()
+        public void DeletePet()
         {
             try
             {
@@ -247,7 +247,7 @@ namespace PetShop.UI
             }
         }
 
-        internal void EditPet()
+        public void EditPet()
         {
             try
             {
@@ -360,7 +360,7 @@ namespace PetShop.UI
             }
         }
 
-        internal void SearchByType()
+        public void SearchByType()
         {
             int selection;
             PetType type;
@@ -428,7 +428,7 @@ namespace PetShop.UI
 
         }
 
-        internal void SortByPrice()
+        public void SortByPrice()
         {
             foreach (Pet pet in _petService.SortPetsByPrice())
             {
@@ -436,7 +436,7 @@ namespace PetShop.UI
             } 
         }
 
-        internal void Get5CheapestPets()
+        public void Get5CheapestPets()
         {
             if(_petService.SortPetsByPrice().Count >= 5)
             {
@@ -455,7 +455,7 @@ namespace PetShop.UI
            
         }
 
-        internal int ShowMenu(string[] menuItems, MenuTypes type)
+        public int ShowMenu(string[] menuItems, MenuTypes type)
         {
             Console.Clear();
 

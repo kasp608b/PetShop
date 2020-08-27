@@ -14,10 +14,14 @@ namespace PetShop.UI
         static void Main(string[] args)
         {
             FakeDB.InitData();
-            IPetRepository petRepository = new PetRepository();
-            IPetService petService = new PetService(petRepository);
-            IParser parser = new Parser();
-            Printer printer = new Printer(petService, parser);
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddScoped<IPetRepository, PetRepository>();
+            serviceCollection.AddScoped<IPetService, PetService>();
+            serviceCollection.AddScoped<IPrinter, Printer>();
+            serviceCollection.AddScoped<IParser, Parser>();
+
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+            var printer = serviceProvider.GetRequiredService<IPrinter>();
             printer.StartMenu();
         }
     }
